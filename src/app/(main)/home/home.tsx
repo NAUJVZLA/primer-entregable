@@ -3,86 +3,48 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {
   Company,
-  Header,
+
   IconButton,
   IconContainer,
   JobDescription,
   JobStatus,
   JobTitle,
-  Page,
-  Panel,
   SearchContainer,
-
   Tab,
   TabContainer,
 } from "@/assets/public/style/Styles-Piepagina";
 import {
   Building2,
   Briefcase,
-  Calculator,
   Edit2,
   Trash2,
   Search,
+  PlusCircle,
 } from "lucide-react";
 import { Card, Grid } from "@/assets/public/style/Style-ContenedorP";
 import { Button } from "@/ui/atoms/boton";
 import ThemeToggleButton from "@/ui/atoms/botonDark";
 import { Input } from "@/ui/atoms/input";
+import { CompanyName } from "@/ui/atoms/CompanyName";
+import { Panel } from "@/ui/moleculas/PanelContenedor";
+import { ContenedorP } from "@/ui/moleculas/ContenedorPrincipal";
+import JobCard from "@/ui/Organism/JobCard";
+
 
 export const jobData = [
-  {
-    title: "Desarrollador Frontend",
-    description: "Se busca desarrollador con experiencia en React",
-    status: "OPEN",
-    company: "TechCorp",
-  },
-  {
-    title: "Diseñador UX",
-    description: "Diseñador UX con 3 años de experiencia",
-    status: "PENDING",
-    company: "DesignHub",
-  },
-  {
-    title: "Vacante 3",
-    description: "Descripción de la vacante 3",
-    status: "OPEN",
-    company: "TechCorp",
-  },
-  {
-    title: "Vacante 4",
-    description: "Descripción de la vacante 4",
-    status: "OPEN",
-    company: "TechCorp",
-  },
-  {
-    title: "Vacante 5",
-    description: "Descripción de la vacante 5",
-    status: "OPEN",
-    company: "TechCorp",
-  },
-  {
-    title: "Vacante 6",
-    description: "Descripción de la vacante 6",
-    status: "OPEN",
-    company: "TechCorp",
-  },
+
 ];
 
 export default function AdminPanel() {
   const Icono = styled(Search)`
-    color: #007bff; /* Color personalizado */
+    color:  rgb(75, 85, 99) /* Color personalizado para que no me traiga el mismo color del texto del imput */
   `;
   const [activeTab, setActiveTab] = useState("vacantes");
-  const [searchTerm, setSearchTerm] = useState("");
-
-  function handleAddVacante(): void {
-    throw new Error("Function not implemented.");
-  }
 
   return (
-    <Page>
+    <ContenedorP>
       <Panel>
-        <Header>Panel de Administración</Header>
+        <CompanyName>Panel De Administracion</CompanyName>
         <ThemeToggleButton />
         <TabContainer>
           <div>
@@ -110,11 +72,12 @@ export default function AdminPanel() {
         </TabContainer>
         <SearchContainer>
           <h1>Vacantes</h1>
-          <Button buttonLabel="crear" icon={<Calculator />} variant="secondary">
+          <Button buttonLabel="crear" icon={<PlusCircle />} variant="secondary">
             {"Agregar Vacantes"}
           </Button>
         </SearchContainer>
-        <Grid>
+        <JobCard />
+        {/* <Grid>
           {jobData.map((job, index) => (
             <Card key={index}>
               <JobTitle>{job.title}</JobTitle>
@@ -131,8 +94,8 @@ export default function AdminPanel() {
               </IconContainer>
             </Card>
           ))}
-        </Grid>
+        </Grid> */}
       </Panel>
-    </Page>
+    </ContenedorP>
   );
 }

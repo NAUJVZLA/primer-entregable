@@ -24,7 +24,7 @@ const InputStyle = styled.input<{ theme: any }>`
   &:focus {
     outline: none;
     border-color: ${({ theme }) =>
-      theme.colors.primaryFocus}; /* Cambia el color del borde al hacer focus */
+    theme.colors.primaryFocus}; /* Cambia el color del borde al hacer focus */
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primaryFocusShadow}; /* Sombra en el foco */
   }
 
@@ -38,7 +38,7 @@ const IconWrapper = styled.span<{ theme: any }>`
   position: absolute;
   left: 10px; /* Posicionamos el ícono dentro del input */
   svg {
-    color: ${({ theme }) => theme.colors.text};
+
     font-size: 1.2em;
   }
 `;
@@ -49,6 +49,7 @@ const InputWrapper = styled.div<{ theme: any }>`
   display: flex;
   align-items: center;
   width: 100%;
+  
 `;
 
 export const Input = ({

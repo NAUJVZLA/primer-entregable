@@ -1,28 +1,28 @@
 import styled from "styled-components";
 
-export const Page = styled.div`
-  min-height: 100vh;
-  background: linear-gradient(135deg, #c084fc 0%, #ec4899 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Inter", sans-serif;
-`;
+// export const Page = styled.div`
+//   min-height: 100vh;
+//   background: linear-gradient(135deg, #c084fc 0%, #ec4899 100%); 
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-family: "Inter", sans-serif;
+// `;
 
-export const Panel = styled.div`
-  background: white;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 1200px;
-  padding: 2rem;
-`;
+// export const Panel = styled.div`
+//   background: ${({ theme }) => theme.colors.background};
+//   border-radius: 8px;
+//   width: 90%;
+//   max-width: 1200px;
+//   padding: 2rem;
+// `;
 
-export const Header = styled.h1`
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-`;
+// export const Header = styled.h1`
+//   text-align: center;
+//   font-size: 1.5rem;
+//   font-weight: 600;
+//   margin-bottom: 1rem;
+// `;
 
 export const TabContainer = styled.div`
   display: flex;

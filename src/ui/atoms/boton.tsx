@@ -22,7 +22,7 @@ const ButtonStyle = styled.button<{ theme: any; variant: string }>`
 
   &:hover {
     background-color: ${({ theme, variant }) =>
-      theme.colors[`${variant}Hover`] || theme.colors[variant]};
+    theme.colors[`${variant}Hover`] || theme.colors[variant]};
   }
 
   &:active {
