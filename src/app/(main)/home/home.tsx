@@ -1,14 +1,7 @@
-"use client";
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import {
-  Company,
-
-  IconButton,
-  IconContainer,
-  JobDescription,
-  JobStatus,
-  JobTitle,
   SearchContainer,
   Tab,
   TabContainer,
@@ -16,12 +9,9 @@ import {
 import {
   Building2,
   Briefcase,
-  Edit2,
-  Trash2,
   Search,
   PlusCircle,
 } from "lucide-react";
-import { Card, Grid } from "@/assets/public/style/Style-ContenedorP";
 import { Button } from "@/ui/atoms/boton";
 import ThemeToggleButton from "@/ui/atoms/botonDark";
 import { Input } from "@/ui/atoms/input";
@@ -77,24 +67,6 @@ export default function AdminPanel() {
           </Button>
         </SearchContainer>
         <JobCard />
-        {/* <Grid>
-          {jobData.map((job, index) => (
-            <Card key={index}>
-              <JobTitle>{job.title}</JobTitle>
-              <JobDescription>{job.description}</JobDescription>
-              <JobStatus>Estado: {job.status}</JobStatus>
-              <Company>Compañía: {job.company}</Company>
-              <IconContainer>
-                <IconButton>
-                  <Edit2 size={16} />
-                </IconButton>
-                <IconButton>
-                  <Trash2 size={16} />
-                </IconButton>
-              </IconContainer>
-            </Card>
-          ))}
-        </Grid> */}
       </Panel>
     </ContenedorP>
   );

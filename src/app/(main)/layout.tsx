@@ -1,6 +1,7 @@
 "use client";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Home from "./home/home";
+import Piepagina from "@/ui/Footer/Piepagina";
 
 export default function RootLayout({
   children,
@@ -15,6 +16,7 @@ export default function RootLayout({
             <Home />
 
             <main className="flex-grow container mx-auto p-6">{children}</main>
+            <Piepagina />
           </div>
         </ThemeProvider>
       </body>
