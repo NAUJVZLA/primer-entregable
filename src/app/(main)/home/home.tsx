@@ -12,7 +12,7 @@ import {
   Page,
   Panel,
   SearchContainer,
-  SearchInput,
+
   Tab,
   TabContainer,
 } from "@/assets/public/style/Styles-Piepagina";
@@ -25,7 +25,6 @@ import {
   Search,
 } from "lucide-react";
 import { Card, Grid } from "@/assets/public/style/Style-ContenedorP";
-import AddButtonWithLabel from "@/ui/moleculas/AddButtonWithLabel";
 import { Button } from "@/ui/atoms/boton";
 import ThemeToggleButton from "@/ui/atoms/botonDark";
 import { Input } from "@/ui/atoms/input";
@@ -70,8 +69,8 @@ export const jobData = [
 ];
 
 export default function AdminPanel() {
-  const Icono = styled(Calculator)`
-    color: white;
+  const Icono = styled(Search)`
+    color: #007bff; /* Color personalizado */
   `;
   const [activeTab, setActiveTab] = useState("vacantes");
   const [searchTerm, setSearchTerm] = useState("");
@@ -106,7 +105,7 @@ export default function AdminPanel() {
           </div>
 
           <div>
-            <Input icon={<Search />} placeholder="Buscar" />
+            <Input icon={<Icono />} placeholder="Buscar" />
           </div>
         </TabContainer>
         <SearchContainer>

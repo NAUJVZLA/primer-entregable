@@ -21,7 +21,7 @@ export const darkTheme = {
   colors: {
     primary: "#1db954",
     primaryHover: "#18a054",
-    secondary: "#0070f3",
+    secondary: "#0070f3",//color de dark mode cuando se pasa a modo oscuro
     secondaryHover: "#005bb5",
     success: "#28a745",
     successHover: "#218838",
