@@ -7,12 +7,17 @@ interface IInput {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   icon?: React.ReactNode; // Aceptamos un ícono como prop
+  variant?: "primary" | "secondary"; // Agregamos la propiedad variant
 }
 
-// Estilos para el input
-const InputStyle = styled.input<{ theme: any }>`
-  padding: 10px 10px 10px 40px; /* Aumentamos padding-left para dejar espacio para el ícono */
-  border: 1px solid ${({ theme }) => theme.colors.border};
+// Estilos para el input con variantes
+const InputStyle = styled.input<{ theme: any; variant?: string }>`
+  padding: 10px 10px 10px 40px; /* dimensiones de mi input*/
+  border: 1px solid
+    ${({ theme, variant }) =>
+      variant === "primary" // estado de vacantes y de compañias de un mismo input de primero de vacante segundo de compañias !
+        ? theme.colors.border
+        : theme.colors.border};
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.background};
   width: 100%;
@@ -23,9 +28,17 @@ const InputStyle = styled.input<{ theme: any }>`
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) =>
-    theme.colors.primaryFocus}; /* Cambia el color del borde al hacer focus */
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primaryFocusShadow}; /* Sombra en el foco */
+    border-color: ${({ theme, variant }) =>
+      variant === "primary"
+        ? theme.colors.primaryFocusShadow // Borde secundario al hacer focus en cuando hace focus a input en compañia
+        : theme.colors
+            .ColorVacantesFocus}; /* Cambia el color del borde al hacer focus  a vacantes*/
+    box-shadow: 0 0 0 3px
+      ${({ theme, variant }) =>
+        variant === "secondary"
+          ? theme.colors.ColorVacantesFocus // color cuando le hago focus a vacantes
+          : theme.colors
+              .primaryFocusShadow}; /* focus de compañias cuando hago focus  */
   }
 
   &:active {
@@ -38,7 +51,6 @@ const IconWrapper = styled.span<{ theme: any }>`
   position: absolute;
   left: 10px; /* Posicionamos el ícono dentro del input */
   svg {
-
     font-size: 1.2em;
   }
 `;
@@ -49,7 +61,6 @@ const InputWrapper = styled.div<{ theme: any }>`
   display: flex;
   align-items: center;
   width: 100%;
-  
 `;
 
 export const Input = ({
@@ -58,6 +69,7 @@ export const Input = ({
   value,
   onChange,
   icon,
+  variant = "primary", // Variante por defecto es "default"
 }: IInput) => {
   const { theme } = useTheme(); // Obtenemos el tema actual del contexto
 
@@ -70,6 +82,7 @@ export const Input = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        variant={variant} // Pasamos la variante al estilo
       />
     </InputWrapper>
   );

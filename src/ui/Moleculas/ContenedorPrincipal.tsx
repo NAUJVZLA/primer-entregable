@@ -6,21 +6,23 @@ interface PanelProps {
 }
 
 // Definimos el componente estilizado
-const StylePanel = styled.div<{ theme: any }>`
-    background-color: ${({ theme }) => theme.colors.background};
-    border-radius: 8px;
-    width: 90%;
-    max-width: 1200px;
-    padding: 2rem;
+const StyleContenedorP = styled.div<{ theme: any }>`
+
+min-height: 100vh;
+background: ${({ theme }) => theme.colors.backgroundlineargradient};
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: "Inter", sans-serif;
 `;
 
 // Componente Panel
-export const Panel = ({ children }: PanelProps) => {
+export const ContenedorP = ({ children }: PanelProps) => {
     const { theme } = useTheme(); // Usa el hook aquí para obtener el tema
 
     return (
-        <StylePanel theme={theme}>
+        <StyleContenedorP theme={theme}>
             {children} {/* Mostramos el contenido pasado como children */}
-        </StylePanel>
+        </StyleContenedorP>
     );
 };

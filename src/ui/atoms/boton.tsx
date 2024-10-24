@@ -2,40 +2,64 @@ import styled from "styled-components";
 import { useTheme } from "@/context/ThemeContext";
 
 interface IButton {
-  variant?: "primary" | "secondary" | "delete" | "error" | "warning";
+  variant: "primary" | "secondary" | "delete" | "error" | "warning" | "none";
   children: React.ReactNode;
   buttonLabel?: string;
   htmlFor?: string;
-  icon?: React.ReactNode; // Aceptamos un ícono como prop
+  icon?: React.ReactNode;
   onClick?: (e: React.MouseEvent) => void;
 }
 
 const ButtonStyle = styled.button<{ theme: any; variant: string }>`
-  background-color: ${({ theme, variant }) => theme.colors[variant]};
-  color: ${({ theme }) => theme.colors.text};
-  padding: 10px 20px;
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  border-radius: 20px;
+  background-color: ${({ theme, variant }) =>
+    variant === "none"
+      ? "transparent"
+      : theme.colors[variant] || "transparent"};
+  color: ${({ theme, variant }) =>
+    variant === "none" ? "inherit" : theme.colors.text};
+
+  /* Ajustamos el padding si tiene borde */
+  padding: ${({ variant, theme }) =>
+    variant === "none"
+      ? "8px"
+      : theme.colors.border
+      ? "8px 18px" // Menor padding si hay borde
+      : "2px 24px"}; // Mayor padding si no hay borde
+
+  /* Configuración del borde */
+  border: ${({ theme, variant }) =>
+    variant === "none"
+      ? theme.colors.border
+        ? `2px solid ${theme.colors.border}`
+        : "2px solid gray"
+      : theme.colors.border
+      ? `2px solid ${theme.colors.border}`
+      : "none"};
+
+  /* Borde más amplio con esquinas redondeadas */
+  border-radius: ${({ variant }) => (variant === "none" ? "8px" : "20px")};
+
   cursor: pointer;
   display: flex;
-  align-items: center; /* Para alinear el contenido junto con el ícono */
+  align-items: center;
 
   &:hover {
     background-color: ${({ theme, variant }) =>
-    theme.colors[`${variant}Hover`] || theme.colors[variant]};
+      variant !== "none" &&
+      (theme.colors[`${variant}Hover`] || theme.colors[variant])};
   }
 
   &:active {
-    opacity: 0.8;
+    opacity: ${({ variant }) => (variant !== "none" ? 0.8 : 1)};
   }
 `;
 
 const IconWrapper = styled.span<{ theme: any }>`
   display: flex;
-  margin-right: 8px; /* Espacio entre ícono y texto */
+  margin-right: 8px;
   svg {
-    color: ${({ theme }) => theme.colors.text}; /* Aplicamos color al ícono */
-    font-size: 1.2em; /* Tamaño del ícono */
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 1.2em;
   }
 `;
 
