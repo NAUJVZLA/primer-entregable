@@ -37,5 +37,5 @@ Esta aplicación es un sistema para administrar vacantes y compañías, donde se
 1. **Clona el repositorio**:
 
    ```bash
-   git clone https://github.com/tu-usuario/vacancies-manager.git
-   cd vacancies-manager
+   git clone https://github.com/NAUJVZLA/primer-entregable.git
+   cd primer-entregable
