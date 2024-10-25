@@ -19,5 +19,25 @@ export const jobData: Job[] = [
     title: "Diseñador UXx1",
     description: "Diseñador UX con 3 años de experiencia en React",
     company: "DesignHub",
+  }, {
+    id: 2,
+    title: "Diseñador UXx1",
+    description: "Diseñador UX con 3 años de experiencia en React",
+    company: "DesignHub",
+  }, {
+    id: 2,
+    title: "Diseñador UXx1",
+    description: "Diseñador UX con 3 años de experiencia en React",
+    company: "DesignHub",
+  }, {
+    id: 2,
+    title: "Diseñador UXx1",
+    description: "Diseñador UX con 3 años de experiencia en React",
+    company: "DesignHub",
+  }, {
+    id: 2,
+    title: "Diseñador UXx1",
+    description: "Diseñador UX con 3 años de experiencia en React",
+    company: "DesignHub",
   },
 ];

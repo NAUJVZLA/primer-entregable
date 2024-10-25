@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vacancies Manager App
 
-## Getting Started
+Esta aplicación es un sistema para administrar vacantes y compañías, donde se pueden agregar, editar y visualizar vacantes, con información específica de cada una. La aplicación está desarrollada en Next.js y TypeScript, utilizando estilos personalizados y componentes atómicos.
 
-First, run the development server:
+## Tecnologías utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js**: Framework de React para el desarrollo de aplicaciones web con enrutamiento y funcionalidades avanzadas.
+- **TypeScript**: Lenguaje de tipado estático para mejorar la seguridad y escalabilidad del código.
+- **Styled-components**: Librería para aplicar estilos CSS de manera dinámica y modular.
+- **React Toastify**: Notificaciones en la interfaz de usuario.
+- **Atomic Design**: Arquitectura de diseño para construir componentes reutilizables en la interfaz de usuario.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Funcionalidades principales
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Vacancies Manager
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Creación de vacantes**: Permite agregar una vacante con título, descripción, estado y compañía.
+- **Gestión de compañías**: Posibilidad de agregar, editar y visualizar compañías asociadas a las vacantes.
+- **Formulario dinámico**: Formulario en `VacancyForm` que incluye validaciones de campo.
+- **Navegación en la app**: Barra de navegación moderna creada con Next.js y diseño responsivo con Tailwind CSS.
+- **Temas y estilo global**: Implementación de variantes de temas usando `styled-components` y configuraciones de temas en el archivo `theme.ts`.
 
-## Learn More
+### Otras características
 
-To learn more about Next.js, take a look at the following resources:
+- **Autenticación básica**: Funciones de inicio de sesión y registro implementadas usando sessionStorage y JSON Server en local.
+- **CRUD de publicaciones**: Funciones para crear, leer, actualizar y eliminar publicaciones, además de la posibilidad de dar "like" a publicaciones.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Estructura de Carpetas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/pages`: Contiene las páginas principales del proyecto (inicio, vacantes, compañías).
+- `/ui/atoms`: Componentes atómicos de interfaz de usuario como `Button` e `Input`.
+- `/theme`: Definición de colores y estilos globales.
+- `/public`: Contiene los íconos y recursos de la aplicación.
 
-## Deploy on Vercel
+## Instalación y Configuración
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Clona el repositorio**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   git clone https://github.com/tu-usuario/vacancies-manager.git
+   cd vacancies-manager

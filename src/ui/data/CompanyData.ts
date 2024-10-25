@@ -19,6 +19,24 @@ export const companyData: Company[] = [
     description: "Agencia de diseño y experiencia del usuario.",
     location: "Medellín, Colombia",
   },
+  {
+    id: 2,
+    title: "DesignHubaaa2",
+    description: "Agencia de diseño y experiencia del usuario.",
+    location: "Medellín, Colombia",
+  },
+  {
+    id: 2,
+    title: "DesignHubaaa2",
+    description: "Agencia de diseño y experiencia del usuario.",
+    location: "Medellín, Colombia",
+  },
+  {
+    id: 2,
+    title: "DesignHubaaa2",
+    description: "Agencia de diseño y experiencia del usuario.",
+    location: "Medellín, Colombia",
+  },
 
   // ... más compañías
 ];

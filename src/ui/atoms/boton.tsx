@@ -8,6 +8,7 @@ interface IButton {
   htmlFor?: string;
   icon?: React.ReactNode;
   onClick?: (e: React.MouseEvent) => void;
+  type?: string;
 }
 
 const ButtonStyle = styled.button<{ theme: any; variant: string }>`
@@ -23,8 +24,8 @@ const ButtonStyle = styled.button<{ theme: any; variant: string }>`
     variant === "none"
       ? "8px"
       : theme.colors.border
-      ? "8px 18px" // Menor padding si hay borde
-      : "2px 24px"}; // Mayor padding si no hay borde
+        ? "8px 18px" // Menor padding si hay borde
+        : "2px 24px"}; // Mayor padding si no hay borde
 
   /* Configuración del borde */
   border: ${({ theme, variant }) =>
@@ -33,8 +34,8 @@ const ButtonStyle = styled.button<{ theme: any; variant: string }>`
         ? `2px solid ${theme.colors.border}`
         : "2px solid gray"
       : theme.colors.border
-      ? `2px solid ${theme.colors.border}`
-      : "none"};
+        ? `2px solid ${theme.colors.border}`
+        : "none"};
 
   /* Borde más amplio con esquinas redondeadas */
   border-radius: ${({ variant }) => (variant === "none" ? "8px" : "20px")};
@@ -45,8 +46,8 @@ const ButtonStyle = styled.button<{ theme: any; variant: string }>`
 
   &:hover {
     background-color: ${({ theme, variant }) =>
-      variant !== "none" &&
-      (theme.colors[`${variant}Hover`] || theme.colors[variant])};
+    variant !== "none" &&
+    (theme.colors[`${variant}Hover`] || theme.colors[variant])};
   }
 
   &:active {
