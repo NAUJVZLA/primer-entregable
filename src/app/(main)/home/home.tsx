@@ -14,11 +14,12 @@ import { Panel } from "@/ui/Moleculas/PanelContenedor";
 import { ContenedorP } from "@/ui/Moleculas/ContenedorPrincipal";
 import Piepagina from "@/ui/Footer/Piepagina";
 import { JobCard } from "@/ui/Organism/JobCard";
-import { companyData } from "@/ui/data/CompanyData"; // Asegúrate de que la ruta sea correcta
-import { jobData } from "@/ui/data/Jobdata"; // Asegúrate de que la ruta sea correcta
+import { companyData } from "@/ui/data/CompanyData";
+import { jobData } from "@/ui/data/Jobdata"; 
 import { Modal } from "@/ui/Organism/Modal";
-import { VacancyForm } from "@/ui/Organism/VacancyForm ";
-import { CompanyForm } from "@/ui/Organism/CompanyForm";
+import { VacancyForm } from "@/ui/forms/VacancyForm ";
+import { CompanyForm } from "@/ui/forms/CompanyForm";
+
 
 
 export default function AdminPanel() {
