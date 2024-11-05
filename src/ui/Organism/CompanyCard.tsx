@@ -1,21 +1,49 @@
 import React from "react";
-
-import { companyData } from "../data/CompanyData"; // Asegúrate de que el archivo contenga los datos de las compañías
 import { JobCard } from "./JobCard";
 
-const CompanyCard = () => {
+interface Vacancy {
+  id: number;
+  title: string;
+  description: string;
+  status: string;
+}
+
+interface Company {
+  id: string;
+  name: string;
+  location: string;
+  contact: string;
+  vacants: Vacancy[];
+}
+
+interface CompanyCardProps {
+  companies: Company[];
+}
+
+const CompanyCard: React.FC<CompanyCardProps> = ({ companies }) => {
   return (
     <div>
-      {companyData.length > 0 ? (
-        companyData.map((company) => (
-          <JobCard
-            key={company.id} // Cambia 'company.id' si el identificador es diferente
-            job={{
-              title: company.title, // Cambia esto según el formato de tus datos
-              description: company.description,
-              location: company.location,
-            }}
-          />
+      {companies.length > 0 ? (
+        companies.map((company) => (
+          <div key={company.id}>
+            <h2>{company.name}</h2>
+            <p>Ubicación: {company.location}</p>
+            <p>Contacto: {company.contact}</p>
+            {company.vacants.length > 0 ? (
+              company.vacants.map((vacant) => (
+                <JobCard
+                  key={vacant.id}
+                  job={{
+                    title: vacant.title,
+                    description: vacant.description,
+                    location: company.location, // ubicación de la compañía
+                  }}
+                />
+              ))
+            ) : (
+              <p>No hay vacantes disponibles.</p>
+            )}
+          </div>
         ))
       ) : (
         <p>No hay compañías disponibles.</p>

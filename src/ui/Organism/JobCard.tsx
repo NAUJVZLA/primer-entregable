@@ -1,11 +1,11 @@
-// src/ui/Organism/JobCard.tsx
+// JobCard.tsx
 import React from "react";
 import styled from "styled-components";
 import { useTheme } from "@/context/ThemeContext";
 import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "../atoms/boton";
 
-// Estilos para la tarjeta de trabajo (sin cambios)
+// Estilos para la tarjeta de trabajo
 const StyledCard = styled.div<{ theme: any }>`
   background: ${({ theme }) => theme.colors.background};
   border-radius: 8px;
@@ -13,7 +13,7 @@ const StyledCard = styled.div<{ theme: any }>`
   padding: 1.5rem;
   margin: 1rem;
   width: 100%;
-  max-width: 350px; // Controla el ancho máximo de las tarjetas
+  max-width: 350px;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
@@ -24,51 +24,50 @@ const StyledCard = styled.div<{ theme: any }>`
   }
 `;
 
-// Contenedor para las tarjetas
 const JobVacanciesGrid = styled.div`
   display: flex;
-  flex-wrap: wrap; // Permite que las tarjetas se envuelvan
-  justify-content: flex-start; // Alinea las tarjetas al inicio
-  margin: -1rem; // Para evitar el espacio adicional en el contenedor
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: -1rem;
 `;
 
-// Títulos y descripciones
 const CardTitle = styled.h3<{ theme: any }>`
   font-size: 1.25rem;
   color: ${({ theme }) => theme.colors.Titulos};
   margin: 0;
-  font-weight: bold; // Añade negrita para mejor visibilidad
+  font-weight: bold;
 `;
 
 const CardDescription = styled.p<{ theme: any }>`
   font-size: 0.875rem;
-  color: ${({ theme }) =>
-    theme.colors.Texto}; // Ajusta el color para mayor contraste
+  color: ${({ theme }) => theme.colors.Texto};
   margin: 0.5rem 0;
 `;
 
 const CompanyName = styled.p<{ theme: any }>`
   font-size: 0.875rem;
-  color: ${({ theme }) =>
-    theme.colors.Texto}; // Ajusta el color para mayor contraste
+  color: ${({ theme }) => theme.colors.Texto};
   margin: 0.5rem 0;
 `;
 
-// Pie de la tarjeta
 const CardFooter = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: auto; // Empuja el pie hacia el final
-  gap: 0.5rem; // Espacio entre los botones
+  margin-top: auto;
+  gap: 0.5rem;
 `;
 
-// Componente JobCard
 interface JobCardProps {
   data: Array<{
     id: number;
     title: string;
     description: string;
-    company: string;
+    company: {
+      id: string;
+      name: string;
+      location: string;
+      contact: string;
+    };
   }>;
 }
 
@@ -83,7 +82,7 @@ export const JobCard: React.FC<JobCardProps> = ({ data }) => {
             <CardTitle theme={theme}>{job.title}</CardTitle>
             <CardDescription theme={theme}>{job.description}</CardDescription>
           </div>
-          <CompanyName theme={theme}>Compañía: {job.company}</CompanyName>
+          <CompanyName theme={theme}>Compañía: {job.company.name}</CompanyName>
           <CardFooter>
             <Button variant="none" aria-label="Editar">
               <Pencil />

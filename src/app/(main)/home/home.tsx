@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   SearchContainer,
@@ -14,39 +14,57 @@ import { Panel } from "@/ui/Moleculas/PanelContenedor";
 import { ContenedorP } from "@/ui/Moleculas/ContenedorPrincipal";
 import Piepagina from "@/ui/Footer/Piepagina";
 import { JobCard } from "@/ui/Organism/JobCard";
-import { companyData } from "@/ui/data/CompanyData";
-import { jobData } from "@/ui/data/Jobdata"; 
 import { Modal } from "@/ui/Organism/Modal";
-import { VacancyForm } from "@/ui/forms/VacancyForm ";
 import { CompanyForm } from "@/ui/forms/CompanyForm";
+import { VacancyForm } from "@/ui/forms/VacancyForm ";
 
-
+import endpoints from "@/app/utils/api";
+import CompanyCard from "@/ui/Organism/CompanyCard";
 
 export default function AdminPanel() {
   const Icono = styled(Search)`
     color: rgb(75, 85, 99);
   `;
 
-  // Estado para manejar la pestaña activa (vacantes o compañías)
   const [activeTab, setActiveTab] = useState("vacantes");
-
-  // Estado para el valor de búsqueda
   const [searchValue, setSearchValue] = useState("");
-
-  // Estado para controlar el modal abierto
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [jobData, setJobData] = useState([]); // Estado para almacenar las vacantes
+  const [companyData, setCompanyData] = useState([]); // Estado para almacenar las compañías
 
-  // Función para abrir el modal
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  useEffect(() => {
+    const fetchVacants = async () => {
+      try {
+        const response = await fetch(endpoints.vacants.getAllVacants);
+        const data = await response.json();
+        const vacants = data.content.map((vacant: any) => ({
+          id: vacant.id,
+          title: vacant.title,
+          description: vacant.description,
+          company: vacant.company,
+        }));
+        setJobData(vacants);
+      } catch (error) {
+        console.error("Error fetching vacants:", error);
+      }
+    };
 
-  // Función para cerrar el modal
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+    const fetchCompanies = async () => {
+      try {
+        const response = await fetch(endpoints.company.getAllCompanies);
+        const data = await response.json();
+        setCompanyData(data); // Asumiendo que 'data' es un array de compañías
+      } catch (error) {
+        console.error("Error fetching companies:", error);
+      }
+    };
 
-  // Función para manejar el cambio en el input de búsqueda
+    fetchVacants();
+    fetchCompanies();
+  }, []);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
@@ -83,8 +101,8 @@ export default function AdminPanel() {
                   ? "Buscar Vacantes"
                   : "Buscar Compañias"
               }
-              value={searchValue} // Pasamos el valor del estado
-              onChange={handleSearchChange} // Pasamos la función que maneja el cambio
+              value={searchValue}
+              onChange={handleSearchChange}
               variant={activeTab === "vacantes" ? "secondary" : "primary"}
             />
           </div>
@@ -95,35 +113,31 @@ export default function AdminPanel() {
             buttonLabel="crear"
             icon={<PlusCircle />}
             variant={activeTab === "vacantes" ? "secondary" : "primary"}
-            onClick={openModal} // Abre el modal al hacer clic
+            onClick={openModal}
           >
             {activeTab === "vacantes"
               ? "Agregar Vacantes"
               : "Agregar Compañias"}
           </Button>
         </SearchContainer>
-        {activeTab === "vacantes" ? (
-          <JobCard data={jobData} /> // Pasa los datos de las vacantes
-        ) : (
-          <JobCard data={companyData} /> // Pasa los datos de las compañías
-        )}
-        <Piepagina />
 
-        {/* Modal */}
-        <Modal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          title={
-            activeTab === "vacantes" ? "Agregar Vacante" : "Agregar Compañía"
-          }
-        >
+        {activeTab === "vacantes" && jobData.length > 0 && (
+          <JobCard data={jobData} />
+        )}
+
+        {activeTab === "companias" && companyData.length > 0 && (
+          <CompanyCard companies={companyData} /> // Muestra las compañías aquí
+        )}
+
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
           {activeTab === "vacantes" ? (
-            <VacancyForm /> // Formulario de vacantes
+            <VacancyForm onClose={closeModal} />
           ) : (
-            <CompanyForm /> // Formulario de compañías
+            <CompanyForm onClose={closeModal} />
           )}
         </Modal>
       </Panel>
+      <Piepagina />
     </ContenedorP>
   );
 }
