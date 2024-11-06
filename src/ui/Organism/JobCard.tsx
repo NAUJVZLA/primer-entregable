@@ -1,12 +1,30 @@
-// JobCard.tsx
 import React from "react";
 import styled from "styled-components";
 import { useTheme } from "@/context/ThemeContext";
 import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "../atoms/boton";
 
-// Estilos para la tarjeta de trabajo
-const StyledCard = styled.div<{ theme: any }>`
+// Interfaces
+interface Company {
+  id: string;
+  name: string;
+  location: string;
+  contact: string;
+}
+
+interface Job {
+  id: number;
+  title: string;
+  description: string;
+  company: Company;
+}
+
+interface JobCardProps {
+  data?: Job[];
+}
+
+// Estilos
+export const StyledCard = styled.div<{ theme: any }>`
   background: ${({ theme }) => theme.colors.background};
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -24,55 +42,57 @@ const StyledCard = styled.div<{ theme: any }>`
   }
 `;
 
-const JobVacanciesGrid = styled.div`
+export const JobVacanciesGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: -1rem;
 `;
 
-const CardTitle = styled.h3<{ theme: any }>`
+export const CardTitle = styled.h3<{ theme: any }>`
   font-size: 1.25rem;
   color: ${({ theme }) => theme.colors.Titulos};
   margin: 0;
   font-weight: bold;
 `;
 
-const CardDescription = styled.p<{ theme: any }>`
+export const CardDescription = styled.p<{ theme: any }>`
   font-size: 0.875rem;
   color: ${({ theme }) => theme.colors.Texto};
   margin: 0.5rem 0;
 `;
 
-const CompanyName = styled.p<{ theme: any }>`
+export const CompanyName = styled.p<{ theme: any }>`
   font-size: 0.875rem;
   color: ${({ theme }) => theme.colors.Texto};
   margin: 0.5rem 0;
 `;
 
-const CardFooter = styled.div`
+export const CardFooter = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: auto;
   gap: 0.5rem;
 `;
 
-interface JobCardProps {
-  data: Array<{
-    id: number;
-    title: string;
-    description: string;
-    company: {
-      id: string;
-      name: string;
-      location: string;
-      contact: string;
-    };
-  }>;
-}
+export const EmptyState = styled.div`
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+  color: ${({ theme }) => theme.colors.Texto};
+`;
 
-export const JobCard: React.FC<JobCardProps> = ({ data }) => {
+export const JobCard: React.FC<JobCardProps> = ({ data = [] }) => {
   const { theme } = useTheme();
+
+  // Si no hay datos, mostrar un mensaje
+  if (!data || data.length === 0) {
+    return (
+      <EmptyState theme={theme}>
+        No hay vacantes disponibles en este momento.
+      </EmptyState>
+    );
+  }
 
   return (
     <JobVacanciesGrid>
@@ -84,12 +104,16 @@ export const JobCard: React.FC<JobCardProps> = ({ data }) => {
           </div>
           <CompanyName theme={theme}>Compañía: {job.company.name}</CompanyName>
           <CardFooter>
-            <Button variant="none" aria-label="Editar">
-              <Pencil />
-            </Button>
-            <Button variant="none" aria-label="Eliminar">
-              <Trash2 />
-            </Button>
+            <Button
+              variant="secondary"
+              buttonLabel="Editar"
+              icon={<Pencil size={16} />}
+            />
+            <Button
+              variant="primary"
+              buttonLabel="Eliminar"
+              icon={<Trash2 size={16} />}
+            />
           </CardFooter>
         </StyledCard>
       ))}

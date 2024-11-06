@@ -1,5 +1,14 @@
 import React from "react";
-import { JobCard } from "./JobCard";
+import {
+  CardFooter,
+  EmptyState,
+  JobCard,
+  JobVacanciesGrid,
+  StyledCard,
+} from "./JobCard";
+import { useTheme } from "@/context/ThemeContext";
+import { Button } from "../atoms/boton";
+import { Pencil, Trash2 } from "lucide-react";
 
 interface Vacancy {
   id: number;
@@ -20,12 +29,22 @@ interface CompanyCardProps {
   companies: Company[];
 }
 
-const CompanyCard: React.FC<CompanyCardProps> = ({ companies }) => {
+const CompanyCard: React.FC<CompanyCardProps> = ({ companies = [] }) => {
+  const { theme } = useTheme();
+
+  // Si no hay datos, mostrar un mensaje
+  if (!companies || companies.length === 0) {
+    return (
+      <EmptyState theme={theme}>
+        No hay vacantes disponibles en este momento.
+      </EmptyState>
+    );
+  }
   return (
-    <div>
+    <JobVacanciesGrid>
       {companies.length > 0 ? (
         companies.map((company) => (
-          <div key={company.id}>
+          <StyledCard key={company.id} theme={theme}>
             <h2>{company.name}</h2>
             <p>Ubicación: {company.location}</p>
             <p>Contacto: {company.contact}</p>
@@ -43,12 +62,24 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ companies }) => {
             ) : (
               <p>No hay vacantes disponibles.</p>
             )}
-          </div>
+            <CardFooter>
+              <Button
+                variant="secondary"
+                buttonLabel="Editar"
+                icon={<Pencil size={16} />}
+              />
+              <Button
+                variant="primary"
+                buttonLabel="Eliminar"
+                icon={<Trash2 size={16} />}
+              />
+            </CardFooter>
+          </StyledCard>
         ))
       ) : (
         <p>No hay compañías disponibles.</p>
       )}
-    </div>
+    </JobVacanciesGrid>
   );
 };
 
